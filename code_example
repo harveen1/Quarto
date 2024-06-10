@@ -1,0 +1,44 @@
+---
+title: "Quarto Exercise 1"
+author: "Harveen Bhathal"
+date: "9/4/2023"
+toc: true
+number-sections: true
+format: 
+  pdf:
+    code-line-numbers: true
+bibliography: references.bib
+nocite: |
+  @*
+editor: visual
+---
+
+## San Francisco
+
+San Francisco is a vibrant city located in California, on a peninsula between the Pacific Ocean and San Francisco Bay.The city is best known for its hilly terrain, eclectic architecture, and historical landmarks. It operates under a city-county government in which legislative authority lies with an elected board of supervisors. The population of San Francisco grew exponentially in the 19th century as people came in droves during the height of the Gold Rush. This is also how the San Francisco 49ers got their name. In terms of its economy, the city is known for hosting the headquarters for many major financial and technological companies[^1].
+
+[^1]: @R2023
+
+## Photo
+
+![San Francisco from the Golden Gate Bridge](San_Francisco_from_the_Marin_Headlands_in_August_2022.jpg)
+
+## Population Density
+
+```{r}
+Population = 808437 
+Area = 46.91
+Density=Population/Area
+Density
+```
+
+@Census2022
+
+## Why SF?
+
+I chose San Francisco as I was born in the San Francisco Bay Area and I have a lot of family there as well. I visited most recently in December 2022, and while I have no desire to move there at this point in my life, I find the city to be beautiful and the culture is very interesting. There is no way anyone can be bored here, as there is always something new to do.
+
+## References
+
+::: {#refs}
+:::
