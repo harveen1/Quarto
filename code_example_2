@@ -1,0 +1,48 @@
+---
+title: "2018 ACS Data"
+author: "Harveen Bhathal"
+date: "10/4/2023"
+format: 
+  pdf:
+    code-line-numbers: true
+editor: visual
+---
+
+## San Francisco County - ACS 2018
+
+This week, we are looking at pre-pandemic data for San Francisco County from the American Community Survey in 2018. This is actually the only "city-county" in California. The variables being examined below include median income, total wages for a household, median age, total population of the county, median rent, voting age population, commute times in the morning and evening, the number of people with their bachelor's degree, the number of employed people, and the number of people with health insurance.
+
+```{r}
+#| echo: false
+#| warning: false
+library(tidycensus)
+acs2018 = load_variables(year = 2018, dataset = "acs5")
+sf2018 = get_acs(
+  geography = "block group",
+  variables = c(
+    medinc = "B19013_001",
+    wages = "B19052_001",
+    medage = "B01002_001",
+    totpop = "B01003_001",
+    medrent = "B25064_001",
+    votepop = "B29001_001",
+    commuters = "B08303_001",
+    language = "B16004_001",
+    bachelors = "B15012_001",
+    employment = "B23025_001",
+    healthins = "B27010_001"
+    ),
+  state = "CA", county = "San Francisco", 
+  output = "wide", year = 2018 )
+
+library(gtsummary)
+sf18 = as.data.frame(sf2018)
+sf18[is.na(sf18)] = 0
+sf18_2 = sf18 %>% select("medincE","wagesE","medageE","totpopE","medrentE","votepopE","commutersE","languageE","bachelorsE","employmentE","healthinsE")
+sf18_2 %>% tbl_summary(label = list(medincE ~ "Median Income", wagesE ~ "Median Wages", medageE ~ "Median Age",totpopE ~ "Total Population",medrentE ~ "Median Rent", votepopE ~ "Total Voting Age Population", commutersE ~ "Total Commuters", languageE ~ "Total Households with Other Language Spoken", bachelorsE ~ "Total Bachelor's Degrees", employmentE ~ "Total Employment",healthinsE ~ "Total Health Insured"),
+    statistic = list(medincE ~ "{median}", wagesE ~ "{median}",medageE ~ "{median}", totpopE ~ "{sum}",medrentE ~ "{median}", votepopE ~ "{sum}",
+    commutersE ~ "{sum}",languageE ~ "{sum}",bachelorsE ~ "{sum}",
+   employmentE ~ "{sum}", healthinsE ~ "{sum}"))
+```
+
+There are a few different summary statistics included in this one table as there is no "one size fits all" measure for the chosen variables. The type of summary statistic is indicated in each row - for any "Total" variable names, the number is the sum total of every row.
